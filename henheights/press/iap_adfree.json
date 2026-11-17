@@ -1,0 +1,119 @@
+{
+ "_hinweis": "Einmalkauf „Werbefrei“. apple: App Store Connect, Produkt henheights_adfree, Name ≤30, Beschreibung ≤45. play: Play-Einmalkauf adfree, Titel ≤55, Beschreibung ≤200. Entfernt nur die Werbepausen; freiwillige Videos bleiben. Kein Preis im Text.",
+ "apple": {
+  "en-US": {
+   "name": "Ad-free",
+   "description": "Removes the ad breaks between games"
+  },
+  "de-DE": {
+   "name": "Werbefrei",
+   "description": "Entfernt die Werbepausen zwischen Spielen"
+  },
+  "tr": {
+   "name": "Reklamsız",
+   "description": "Oyunlar arasındaki reklam aralarını kaldırır"
+  },
+  "es-ES": {
+   "name": "Sin anuncios",
+   "description": "Quita las pausas publicitarias entre partidas"
+  },
+  "it": {
+   "name": "Senza pubblicità",
+   "description": "Toglie le pause pubblicitarie tra le partite"
+  },
+  "pt-BR": {
+   "name": "Sem anúncios",
+   "description": "Tira os intervalos de anúncio entre partidas"
+  },
+  "zh-Hans": {
+   "name": "免广告",
+   "description": "去除每局游戏之间的广告时间"
+  },
+  "zh-Hant": {
+   "name": "無廣告",
+   "description": "移除每局遊戲之間的廣告時間"
+  },
+  "ja": {
+   "name": "広告なし",
+   "description": "ゲームの合間の広告タイムがなくなります"
+  },
+  "ru": {
+   "name": "Без рекламы",
+   "description": "Убирает рекламные паузы между играми"
+  },
+  "fr-FR": {
+   "name": "Sans publicité",
+   "description": "Supprime les pauses pub entre les parties"
+  },
+  "nl-NL": {
+   "name": "Reclamevrij",
+   "description": "Verwijdert de reclamepauzes tussen spellen"
+  },
+  "ko": {
+   "name": "광고 제거",
+   "description": "게임 사이의 광고 시간을 없애요"
+  },
+  "pl": {
+   "name": "Bez reklam",
+   "description": "Usuwa przerwy na reklamy między grami"
+  }
+ },
+ "play": {
+  "en-US": {
+   "title": "Ad-free",
+   "description": "Removes the ad breaks between games. One-time purchase, no subscription. Optional videos stay available."
+  },
+  "de-DE": {
+   "title": "Werbefrei",
+   "description": "Entfernt die Werbepausen zwischen Spielen. Einmalkauf, kein Abo. Freiwillige Videos bleiben verfügbar."
+  },
+  "tr-TR": {
+   "title": "Reklamsız",
+   "description": "Oyunlar arasındaki reklam aralarını kaldırır. Tek seferlik satın alma, abonelik yok. İsteğe bağlı videolar kullanılabilir kalır."
+  },
+  "es-ES": {
+   "title": "Sin anuncios",
+   "description": "Quita las pausas publicitarias entre partidas. Compra única, sin suscripción. Los vídeos opcionales siguen disponibles."
+  },
+  "it-IT": {
+   "title": "Senza pubblicità",
+   "description": "Toglie le pause pubblicitarie tra le partite. Acquisto unico, nessun abbonamento. I video facoltativi restano disponibili."
+  },
+  "pt-BR": {
+   "title": "Sem anúncios",
+   "description": "Remove os intervalos de anúncio entre partidas. Compra única, sem assinatura. Os vídeos opcionais continuam disponíveis."
+  },
+  "zh-CN": {
+   "title": "免广告",
+   "description": "去除每局游戏之间的广告时间。一次性购买，不是订阅。自愿观看的视频仍可使用。"
+  },
+  "zh-TW": {
+   "title": "無廣告",
+   "description": "移除每局遊戲之間的廣告時間。一次性購買，不是訂閱。自願觀看的影片仍可使用。"
+  },
+  "ja-JP": {
+   "title": "広告なし",
+   "description": "ゲームの合間の広告タイムがなくなります。買い切りで、サブスクではありません。任意の動画は引き続き利用できます。"
+  },
+  "ru-RU": {
+   "title": "Без рекламы",
+   "description": "Убирает рекламные паузы между играми. Разовая покупка, без подписки. Добровольные видео остаются доступными."
+  },
+  "fr-FR": {
+   "title": "Sans publicité",
+   "description": "Supprime les pauses publicitaires entre les parties. Achat unique, sans abonnement. Les vidéos facultatives restent disponibles."
+  },
+  "nl-NL": {
+   "title": "Reclamevrij",
+   "description": "Verwijdert de reclamepauzes tussen spellen. Eenmalige aankoop, geen abonnement. Vrijwillige video's blijven beschikbaar."
+  },
+  "ko-KR": {
+   "title": "광고 제거",
+   "description": "게임 사이의 광고 시간을 없애요. 한 번만 구매하면 되고 구독이 아니에요. 선택형 동영상은 계속 이용할 수 있어요."
+  },
+  "pl-PL": {
+   "title": "Bez reklam",
+   "description": "Usuwa przerwy na reklamy między grami. Jednorazowy zakup, bez subskrypcji. Dobrowolne filmy pozostają dostępne."
+  }
+ }
+}
