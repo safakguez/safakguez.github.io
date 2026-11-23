@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Atlas Zoom – Schulversion / School edition</title>
+<link rel="icon" href="../favicon.png">
+<!-- Schulversion: Code-Abfrage vor dem Spiel (tool/build_school_web.py kopiert diese Seite nach …/atlaszoom/schule/).
+     Gültige Codes stehen als SHA-256-Hash mit Ablaufdatum in codes.json (aus store/schulcodes.csv, tool/schulcode.py).
+     Klassenlink: …/atlaszoom/schule/?code=ABCD-2345 – der Browser merkt sich den Code, danach startet das Spiel direkt.
+     Keine Cookies, keine externen Anfragen, keine Werbung, keine Käufe. -->
+<style>
+:root{--bg:#e9eff6;--card:#fff;--ink:#0f2238;--muted:#4b6280;--acc:#1f6fd1;--acc-dark:#154f97;--line:#d4deea;--warm:#fff4da;--warm-line:#f2b33d;--err:#b9472f}
+@media (prefers-color-scheme:dark){:root{--bg:#0a1626;--card:#13283f;--ink:#eaf2fb;--muted:#8ea7c3;--acc:#5aa2ff;--acc-dark:#2f6fc4;--line:#22385a;--warm:#2b2414;--warm-line:#8a6a1f;--err:#ff8a6a}}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#gate{box-sizing:border-box;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{background:var(--card);border-radius:24px;max-width:440px;width:100%;padding:28px 24px;box-shadow:0 2px 0 var(--line)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.brand img{width:48px;height:48px;border-radius:12px}
+h1{font-size:24px;margin:0;line-height:1.15}
+.sub{color:var(--acc);font-weight:800;font-size:14px;margin:0}
+p{line-height:1.5;margin:14px 0}
+form{display:flex;gap:8px;flex-wrap:wrap}
+input{flex:1 1 180px;min-width:0;font:inherit;font-size:18px;letter-spacing:1px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink)}
+input:not(:placeholder-shown){text-transform:uppercase}
+input:focus{outline:none;border-color:var(--acc)}
+button{font:inherit;font-weight:800;font-size:17px;color:#fff;background:var(--acc);border:0;border-radius:14px;padding:12px 22px;box-shadow:0 3px 0 var(--acc-dark);cursor:pointer}
+button:disabled{opacity:.6;cursor:default}
+.err{color:var(--err);font-weight:800;min-height:1.5em;margin:10px 0 0}
+.small{font-size:14px;color:var(--muted)}
+a{color:var(--acc);font-weight:800}
+.stores{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.stores a{display:inline-block;text-decoration:none;color:var(--ink);background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:8px 12px;font-size:14px}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.foot{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+.foot a{font-weight:600;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="gate" hidden>
+  <div class="card">
+    <div class="brand"><img src="../icon.png" alt=""><div><h1>Atlas Zoom</h1><p class="sub" id="t0"></p></div></div>
+    <p id="t1"></p>
+    <form id="f" autocomplete="off">
+      <input id="code" type="text" maxlength="12" autocapitalize="characters" spellcheck="false">
+      <button id="go" type="submit"></button>
+    </form>
+    <p class="err" id="err" role="alert"></p>
+    <hr>
+    <p class="small"><span id="t6"></span> <a id="mail" href="mailto:contact@decly.app">contact@decly.app</a> · <a id="guide"></a></p>
+    <p class="small"><span id="t7"></span>
+      <span class="stores"><a href="https://play.google.com/store/apps/details?id=com.atlaszoom.app">Google Play</a><a href="https://apps.apple.com/app/id6837924376">App Store</a></span></p>
+    <p class="foot"><a href="../datenschutz.html">Datenschutz</a> · <a href="../privacy.html">Privacy</a> · <a href="../impressum.html">Impressum</a></p>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var SALT = 'az-school-v1:';
+  var KEY = 'az_school_code';
+  // [0 Titel, 1 Einleitung, 2 Platzhalter, 3 Knopf, 4 ungültig, 5 abgelaufen, 6 Lehrkräfte, 7 privat spielen, 8 Leitfaden, 9 laden, 10 Leitfaden-Datei]
+  var T = {
+ "de": [
+  "Schulversion",
+  "Atlas Zoom für den Unterricht – ohne Werbung und ohne Käufe. Gib den Schulcode deiner Lehrkraft ein oder öffne den Klassenlink.",
+  "Schulcode, z. B. ABCD-2345",
+  "Spielen",
+  "Dieser Code gilt nicht. Prüf die Schreibweise oder frag deine Lehrkraft.",
+  "Dieser Code ist abgelaufen. Deine Lehrkraft kann kostenlos einen neuen anfordern.",
+  "Sie unterrichten? Den Schulcode gibt es kostenlos per Mail an",
+  "Privat spielen? Die App gibt es kostenlos:",
+  "Leitfaden für Lehrkräfte",
+  "Spiel wird geladen …",
+  "lehrkraefte.html"
+ ],
+ "en": [
+  "School edition",
+  "Atlas Zoom for the classroom – no ads, no purchases. Enter the school code from your teacher or open your class link.",
+  "School code, e.g. ABCD-2345",
+  "Play",
+  "This code isn't valid. Check the spelling or ask your teacher.",
+  "This code has expired. Your teacher can request a new one for free.",
+  "Are you a teacher? Get a free school code by emailing",
+  "Playing at home? Get the free app:",
+  "Teachers' guide",
+  "Loading the game …",
+  "teachers.html"
+ ],
+ "tr": [
+  "Okul sürümü",
+  "Ders için Atlas Zoom: reklam yok, satın alma yok. Derste aldığın okul kodunu gir ya da sınıf bağlantısını aç.",
+  "Okul kodu, ör. ABCD-2345",
+  "Oyna",
+  "Bu kod geçerli değil. Yazımı kontrol et ya da derste sor.",
+  "Bu kodun süresi doldu. Ücretsiz yeni bir kod istenebilir.",
+  "Öğretmen misiniz? Okul kodu ücretsizdir, yazın:",
+  "Evde mi oynayacaksın? Uygulama ücretsiz:",
+  "Öğretmen rehberi",
+  "Oyun yükleniyor…",
+  "teachers.html"
+ ],
+ "es": [
+  "Versión escolar",
+  "Atlas Zoom para el aula: sin anuncios y sin compras. Introduce el código escolar que te dieron en clase o abre el enlace de tu clase.",
+  "Código escolar, p. ej. ABCD-2345",
+  "Jugar",
+  "Este código no es válido. Revisa cómo lo escribiste o pregunta en clase.",
+  "Este código ha caducado. Se puede pedir uno nuevo gratis.",
+  "¿Das clase? El código escolar es gratuito: escribe a",
+  "¿Juegas en casa? La app es gratuita:",
+  "Guía para docentes",
+  "Cargando el juego…",
+  "teachers.html"
+ ],
+ "it": [
+  "Versione scuola",
+  "Atlas Zoom per la classe: senza pubblicità e senza acquisti. Inserisci il codice scolastico ricevuto in classe o apri il link della tua classe.",
+  "Codice scolastico, es. ABCD-2345",
+  "Gioca",
+  "Questo codice non è valido. Controlla come l'hai scritto o chiedi in classe.",
+  "Questo codice è scaduto. Se ne può richiedere uno nuovo gratis.",
+  "Insegni? Il codice scolastico è gratuito: scrivi a",
+  "Giochi a casa? L'app è gratuita:",
+  "Guida per docenti",
+  "Caricamento del gioco…",
+  "teachers.html"
+ ],
+ "pt": [
+  "Versão escolar",
+  "Atlas Zoom para a sala de aula: sem anúncios e sem compras. Digite o código escolar recebido na aula ou abra o link da sua turma.",
+  "Código escolar, ex.: ABCD-2345",
+  "Jogar",
+  "Este código não é válido. Confira a digitação ou pergunte na aula.",
+  "Este código expirou. É possível pedir um novo de graça.",
+  "Você dá aulas? O código escolar é gratuito: escreva para",
+  "Vai jogar em casa? O app é gratuito:",
+  "Guia para docentes",
+  "Carregando o jogo…",
+  "teachers.html"
+ ],
+ "zh": [
+  "学校版",
+  "课堂用的 Atlas Zoom：没有广告，没有购买。请输入课堂上拿到的学校代码，或打开班级链接。",
+  "学校代码，例如 ABCD-2345",
+  "开始游戏",
+  "此代码无效。请检查输入，或在课堂上询问。",
+  "此代码已过期。可以免费申请新的代码。",
+  "您是教师吗？学校代码免费提供，请发邮件至",
+  "在家玩？免费下载 App：",
+  "教师指南",
+  "游戏加载中…",
+  "teachers.html"
+ ],
+ "zh-Hant": [
+  "學校版",
+  "課堂用的 Atlas Zoom：沒有廣告，沒有購買。請輸入課堂上拿到的學校代碼，或打開班級連結。",
+  "學校代碼，例如 ABCD-2345",
+  "開始遊戲",
+  "此代碼無效。請檢查輸入，或在課堂上詢問。",
+  "此代碼已過期。可以免費申請新的代碼。",
+  "您是老師嗎？學校代碼免費提供，請寄信至",
+  "在家玩？免費下載 App：",
+  "教師指南",
+  "遊戲載入中…",
+  "teachers.html"
+ ],
+ "ja": [
+  "学校版",
+  "授業用の Atlas Zoom：広告なし・購入なし。授業で受け取った学校コードを入力するか、クラスのリンクを開いてください。",
+  "学校コード（例：ABCD-2345）",
+  "プレイ",
+  "このコードは無効です。入力内容を確かめるか、授業で確認してください。",
+  "このコードは有効期限が切れています。新しいコードは無料で申し込めます。",
+  "先生の方へ：学校コードは無料です。お申し込み先",
+  "家で遊ぶなら無料アプリをどうぞ：",
+  "先生向けガイド",
+  "ゲームを読み込み中…",
+  "teachers.html"
+ ],
+ "ru": [
+  "Школьная версия",
+  "Atlas Zoom для уроков: без рекламы и без покупок. Введи школьный код, полученный на уроке, или открой ссылку класса.",
+  "Школьный код, напр. ABCD-2345",
+  "Играть",
+  "Этот код недействителен. Проверь написание или спроси на уроке.",
+  "Срок действия кода истёк. Новый код можно запросить бесплатно.",
+  "Вы преподаёте? Школьный код бесплатный — пишите на",
+  "Играешь дома? Приложение бесплатное:",
+  "Руководство для учителей",
+  "Игра загружается…",
+  "teachers.html"
+ ],
+ "fr": [
+  "Version scolaire",
+  "Atlas Zoom pour la classe : sans publicité ni achats. Saisis le code scolaire reçu en classe ou ouvre le lien de ta classe.",
+  "Code scolaire, p. ex. ABCD-2345",
+  "Jouer",
+  "Ce code n'est pas valable. Vérifie la saisie ou renseigne-toi en classe.",
+  "Ce code a expiré. Un nouveau code peut être demandé gratuitement.",
+  "Vous enseignez ? Le code scolaire est gratuit : écrivez à",
+  "Pour jouer à la maison, l'app est gratuite :",
+  "Guide pédagogique",
+  "Chargement du jeu…",
+  "teachers.html"
+ ],
+ "nl": [
+  "Schoolversie",
+  "Atlas Zoom voor in de klas: zonder reclame en zonder aankopen. Voer de schoolcode in die je in de les kreeg, of open de klaslink.",
+  "Schoolcode, bijv. ABCD-2345",
+  "Spelen",
+  "Deze code is niet geldig. Controleer de spelling of vraag het in de les.",
+  "Deze code is verlopen. Een nieuwe code is gratis aan te vragen.",
+  "Geeft u les? De schoolcode is gratis: mail naar",
+  "Thuis spelen? De app is gratis:",
+  "Handleiding voor docenten",
+  "Spel wordt geladen…",
+  "teachers.html"
+ ],
+ "ko": [
+  "학교용 버전",
+  "수업용 Atlas Zoom: 광고도 구매도 없습니다. 수업에서 받은 학교 코드를 입력하거나 반 링크를 여세요.",
+  "학교 코드 (예: ABCD-2345)",
+  "시작하기",
+  "유효하지 않은 코드입니다. 입력한 내용을 확인하거나 수업 중에 물어보세요.",
+  "만료된 코드입니다. 새 코드는 무료로 신청할 수 있어요.",
+  "선생님이신가요? 학교 코드는 무료입니다. 신청:",
+  "집에서 플레이하나요? 무료 앱을 받으세요:",
+  "교사용 가이드",
+  "게임을 불러오는 중…",
+  "teachers.html"
+ ],
+ "pl": [
+  "Wersja szkolna",
+  "Atlas Zoom na lekcje: bez reklam i bez zakupów. Wpisz kod szkolny otrzymany na lekcji albo otwórz link klasy.",
+  "Kod szkolny, np. ABCD-2345",
+  "Graj",
+  "Ten kod jest nieprawidłowy. Sprawdź pisownię albo zapytaj na lekcji.",
+  "Ten kod wygasł. Nowy kod można zamówić bezpłatnie.",
+  "Uczysz? Kod szkolny jest bezpłatny – napisz na",
+  "Grasz w domu? Aplikacja jest bezpłatna:",
+  "Przewodnik dla nauczycieli",
+  "Ładowanie gry…",
+  "teachers.html"
+ ]
+};
+  var params = new URLSearchParams(location.search);
+  function pickLang(raw) {
+    var l = String(raw || 'en').replace('_', '-').toLowerCase();
+    if (l.indexOf('zh') === 0) return /hant|-tw|-hk|-mo/.test(l) ? 'zh-Hant' : 'zh';
+    var base = l.split('-')[0];
+    return T[base] ? base : 'en';
+  }
+  var lang = pickLang(params.get('lang') || (navigator.languages && navigator.languages[0]) || navigator.language);
+  var t = T[lang];
+  document.documentElement.lang = lang;
+  function norm(c) { return String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+  function sha256(s) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function (b) {
+      return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+    });
+  }
+  var db = null;
+  function codes() {
+    if (db) return Promise.resolve(db);
+    return fetch('codes.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (j) { db = j; return j; });
+  }
+  function check(code) {  // 'ok' | 'invalid' | 'expired'
+    var n = norm(code);
+    if (n.length !== 8) return Promise.resolve('invalid');
+    return Promise.all([codes(), sha256(SALT + n)]).then(function (r) {
+      var until = r[0].codes[r[1]];
+      if (!until) return 'invalid';
+      var d = new Date(), iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+      return iso > until ? 'expired' : 'ok';
+    });
+  }
+  function store(c) { try { localStorage.setItem(KEY, norm(c)); } catch (e) {} }
+  function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function forget() { try { localStorage.removeItem(KEY); } catch (e) {} }
+  function startGame() {
+    // Sprache nur weitergeben, wenn sie im Link stand – sonst wählt das Spiel selbst (Gerätesprache / 🌐).
+    location.replace('spiel.html' + (params.get('lang') ? '?lang=' + encodeURIComponent(params.get('lang')) : ''));
+  }
+  function showGate(problem) {
+    document.getElementById('t0').textContent = t[0];
+    document.getElementById('t1').textContent = t[1];
+    var input = document.getElementById('code');
+    input.placeholder = t[2]; input.setAttribute('aria-label', t[2]);
+    var btn = document.getElementById('go'); btn.textContent = t[3];
+    var err = document.getElementById('err');
+    err.textContent = problem === 'expired' ? t[5] : problem === 'invalid' ? t[4] : '';
+    document.getElementById('t6').textContent = t[6];
+    document.getElementById('mail').href = 'mailto:contact@decly.app?subject=' + encodeURIComponent('Schulcode / School code – Atlas Zoom');
+    var g = document.getElementById('guide'); g.textContent = t[8]; g.href = '../' + t[10];
+    document.getElementById('t7').textContent = t[7];
+    document.getElementById('f').addEventListener('submit', function (ev) {
+      ev.preventDefault(); btn.disabled = true;
+      check(input.value).then(function (r) {
+        if (r === 'ok') { store(input.value); startGame(); return; }
+        err.textContent = r === 'expired' ? t[5] : t[4]; btn.disabled = false;
+      }).catch(function () { err.textContent = t[4]; btn.disabled = false; });
+    });
+    document.getElementById('gate').hidden = false;
+    if (problem !== 'expired') input.focus();
+  }
+  var fromUrl = params.get('code');
+  var code = fromUrl || saved();
+  if (!code || !window.crypto || !crypto.subtle) { showGate(fromUrl ? 'invalid' : null); return; }
+  check(code).then(function (r) {
+    if (r === 'ok') { store(code); startGame(); return; }
+    if (!fromUrl) forget();
+    showGate(r);
+  }).catch(function () { showGate(null); });
+})();
+</script>
+</body>
+</html>
