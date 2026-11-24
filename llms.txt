@@ -1,0 +1,25 @@
+# decly – games and learning apps
+
+> decly UG (haftungsbeschränkt) is a small independent studio in Berlin, Germany. All apps are free for iPhone and Android, work without an account and show only non-personalised ads; an optional one-time purchase removes ads. Developed with the help of AI tools. Contact: contact@decly.app
+
+## Learning apps
+
+- [Pocket to Portfolio](https://safakguez.github.io/pocket-to-portfolio/): A free life simulation about money for teens (from age 15): part-time jobs, apprenticeship or college, rent, budget, emergency fund, index-fund savings plan, compound interest, overdraft and instalments, scams and a market crash. 16 languages, local currencies, offline. Neutral: no bank or broker recommendations, no affiliate links. Free ad-free codes for classes and an ad-free school edition in the browser for schools that don't allow ads.
+- [Pocket to Portfolio – teacher guide](https://safakguez.github.io/pocket-to-portfolio/teachers.html): 90-minute lesson plan, learning goals, discussion questions (also in German, Spanish, French, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Turkish, Chinese).
+- [Atlas Zoom – Geography Quiz](https://safakguez.github.io/atlaszoom/): Geography quiz for all 195 countries: flags and outlines under a magnifier, capitals, map location, a daily world trip and spaced repetition. 14 languages, offline, no account.
+- [Atlas Zoom – for teachers](https://safakguez.github.io/atlaszoom/teachers.html): lesson ideas for geography; ad-free school edition in the browser for schools that don't allow ads.
+
+## Games
+
+- [Frog Rise – Pixel Climb](https://safakguez.github.io/frogrise/): A pixel frog climbs up waterfalls across eight maps – a free arcade climbing game.
+- [Hen Heights – Chicken Climb](https://safakguez.github.io/henheights/): A pixel chicken jumps between houses all the way to space – a free arcade jumping game with leaderboards.
+- [Lovebirdoku – Logic Puzzle](https://safakguez.github.io/lovebirdoku/): A logic puzzle with lovebirds: bring every pair to its place using logic alone. 300 levels, puzzle of the day, 14 languages.
+- [Paddle Blaze – Table Tennis](https://safakguez.github.io/paddleblaze/): Fast table tennis seen from above, with a power shot that charges over time – a free arcade sports game.
+- [Rare Feather – Daily Quiz](https://safakguez.github.io/rarefeather/): The daily quiz where the rare right answer wins: name a correct answer few other players think of. 14 languages.
+- [Raster Rally – Retro Racer](https://safakguez.github.io/rasterrally/): A retro racer in the pixel style of classic 8-bit home computers, with leaderboards.
+- [Treble Rush – Darts Career](https://safakguez.github.io/treblerush/): A darts career from the pub tournament to the world final – a free darts game with leaderboards. 14 languages.
+
+## Optional
+
+- [Press kit Pocket to Portfolio](https://safakguez.github.io/pocket-to-portfolio/presse.html): screenshots, key art, facts.
+- [Imprint](https://safakguez.github.io/pocket-to-portfolio/impressum.html)
