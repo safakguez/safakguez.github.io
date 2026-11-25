@@ -6,6 +6,7 @@
 
 - [Pocket to Portfolio](https://safakguez.github.io/pocket-to-portfolio/): A free life simulation about money for teens (from age 15): part-time jobs, apprenticeship or college, rent, budget, emergency fund, index-fund savings plan, compound interest, overdraft and instalments, scams and a market crash. 16 languages, local currencies, offline. Neutral: no bank or broker recommendations, no affiliate links. Free ad-free codes for classes and an ad-free school edition in the browser for schools that don't allow ads.
 - [Pocket to Portfolio – teacher guide](https://safakguez.github.io/pocket-to-portfolio/teachers.html): 90-minute lesson plan, learning goals, discussion questions (also in German, Spanish, French, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Turkish, Chinese).
+- [Anatomy Zoom – Learn Anatomy](https://safakguez.github.io/anatomyzoom/): Anatomy learning game for humans and animals: zoom quiz, tap-the-spot with distance in cm, a daily journey through the body, flashcards with spaced repetition and a 3D body. German and Azerbaijani, offline, no account. Not medical advice.
 - [Atlas Zoom – Geography Quiz](https://safakguez.github.io/atlaszoom/): Geography quiz for all 195 countries: flags and outlines under a magnifier, capitals, map location, a daily world trip and spaced repetition. 14 languages, offline, no account.
 - [Atlas Zoom – for teachers](https://safakguez.github.io/atlaszoom/teachers.html): lesson ideas for geography; ad-free school edition in the browser for schools that don't allow ads.
 
